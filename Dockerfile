@@ -13,8 +13,10 @@ RUN wget --no-check-certificate -O /tmp/odoo.rpm https://nightly.odoo.com/${ODOO
     yum localinstall -y /tmp/odoo.rpm && \
     rm -rf /tmp/odoo.rpm
 
-COPY ./configs/entrypoint.sh /
-COPY ./configs/openerp-server.conf /etc/odoo/
+COPY ./entrypoint.sh /
+RUN ["chmod", "+x", "/entrypoint.sh"]
+
+COPY ./openerp-server.conf /etc/odoo/
 
 RUN mkdir -p /mnt/extra-addons
 
